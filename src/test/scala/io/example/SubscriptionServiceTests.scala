@@ -46,9 +46,12 @@ class SubscriptionServiceTests extends munit.CatsEffectSuite {
     val subscriptionCancellationForUserB =
       subscriptionService.unsubscribeRepository(slackIdForUserB, repository)
 
+    val initialState =
+      ServiceState.generateSubscriptions(repository, List(slackIdForUserA, slackIdForUserB))
+
     val serviceStates = for {
       stateAfterCancellingSubscriptionForUserA <- subscriptionCancellationForUserA.runS(
-        ServiceState.generateSubscriptions(repository, List(slackIdForUserA, slackIdForUserB))
+        initialState
       )
       stateAfterCancellingSubscriptionForUserB <- subscriptionCancellationForUserB.runS(
         stateAfterCancellingSubscriptionForUserA
