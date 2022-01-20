@@ -1,6 +1,5 @@
 package io.example
 
-import cats.MonadThrow
 import cats.effect.kernel.Sync
 import cats.syntax.applicativeError._
 import cats.syntax.flatMap._
